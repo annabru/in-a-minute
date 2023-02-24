@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { SetUp } from "./pages/SetUp/SetUp.tsx";
 

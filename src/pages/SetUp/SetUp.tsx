@@ -1,18 +1,21 @@
-import { Button, Card, Pagination, Typography } from "@mui/material";
-import axios from "axios";
+import { Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { load } from "cheerio";
 import { Box } from "@mui/system";
 
 export const SetUp = () => {
   const [artists, setArtist] = useState<Array<string>>();
   const [page, setPage] = useState(1);
   const [score, setScore] = useState(0);
-  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
-    fetch("/assets/people.txt")
-      .then((response) => response.text())
+    fetch("people.txt", {
+      headers: {
+        Accept: "text/plain",
+      },
+    })
+      .then((response) => {
+        return response.text();
+      })
       .then((text) => {
         console.log(text);
         setArtist(text.split("\n"));
@@ -21,29 +24,6 @@ export const SetUp = () => {
         console.error(error);
       });
   }, []);
-
-  // useEffect(() => {
-  //   const searchQuery = "cute puppies"; // the search query to fetch the first image result for
-  //   const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}&tbm=isch`;
-
-  //   axios.get(searchUrl).then((response) => {
-  //     const $ = load(response.data);
-
-  //     const imageUrl = $("img").first().attr("src");
-
-  //     if (imageUrl) {
-  //       setImageUrl(imageUrl);
-  //     }
-  //   });
-  // }, [artists, page]);
-
-  // const divStyle = {
-  //   backgroundImage: `url(${imageUrl})`,
-  //   backgroundSize: "cover",
-  //   backgroundPosition: "center",
-  //   height: "200px",
-  //   width: "200px",
-  // };
 
   return (
     <Box

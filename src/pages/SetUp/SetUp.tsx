@@ -6,6 +6,7 @@ export const SetUp = () => {
   const [artists, setArtist] = useState<Array<string>>();
   const [page, setPage] = useState(1);
   const [score, setScore] = useState(0);
+  const [skiped, setSkiped] = useState(0);
 
   useEffect(() => {
     fetch("people.txt", {
@@ -26,20 +27,18 @@ export const SetUp = () => {
   }, []);
 
   return (
-    <Box
-      onKeyDown={(e) => {
-        if (e.key === "ArrowLeft") {
-          setPage(page + 1);
-        } else if (e.key === "ArrowRight") {
-          setPage(page + 1);
-          setScore(score + 1);
-        }
-      }}
-    >
-      {/* <div style={divStyle}></div> */}
+    <div>
       <Typography variant="h1">{artists ? artists[page] : "Loading"} </Typography>
       <Typography variant="h2">Score: {score} </Typography>
-      <Button variant="outlined" color="error" onClick={() => setPage(page + 1)}>
+      <Typography variant="h3">Skiped: {skiped} </Typography>
+      <Button
+        variant="outlined"
+        color="error"
+        onClick={() => {
+          setPage(page + 1);
+          setSkiped(skiped + 1);
+        }}
+      >
         Skip
       </Button>
       <Button
@@ -53,6 +52,6 @@ export const SetUp = () => {
         Success!
       </Button>
       <Button onClick={() => setScore(0)}>Reset Score</Button>
-    </Box>
+    </div>
   );
 };

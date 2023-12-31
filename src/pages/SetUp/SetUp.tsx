@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 
 export const SetUp = () => {
   const [artists, setArtist] = useState<Array<string>>();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [score, setScore] = useState(0);
   const [skiped, setSkiped] = useState(0);
 
@@ -18,8 +18,11 @@ export const SetUp = () => {
         return response.text();
       })
       .then((text) => {
-        console.log(text);
-        setArtist(text.split("\n"));
+        let list = text.split("\n");
+        let filteredList = list.filter(onlyUnique);
+        let randomList = shuffleArray(filteredList as string[]);
+        console.log(randomList);
+        setArtist(randomList);
       })
       .catch((error) => {
         console.error(error);
@@ -55,3 +58,17 @@ export const SetUp = () => {
     </div>
   );
 };
+
+function onlyUnique(value : any, index: number, array: any[]) {
+  return array.indexOf(value) === index;
+}
+
+function shuffleArray(array: string[]): string[] {
+  // Create a copy of the original array to avoid modifying the original
+  const shuffledArray = [...array];
+
+  // Shuffle the array using the sort method with a random compare function
+  shuffledArray.sort(() => Math.random() - 0.5);
+
+  return shuffledArray;
+}

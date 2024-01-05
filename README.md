@@ -34,6 +34,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### `npm run deploy`
 Deploy to gh-page. No pipeline, needs to be done manually. 
 
+Seems like what is does is that it builds and push the result to the branch "gh-pages", and this branch is the one actually deployed.
+
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
 If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
